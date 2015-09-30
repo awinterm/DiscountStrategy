@@ -22,37 +22,39 @@ public class LineItem {
     }
 
     public LineItem(Product product, int qty) {
+        this.product = product;
+        this.qty = qty;
     }
     
-    public String getProductID(){
+    public final String getProductID(){
         return product.getProductID();
     }
     
-    public String getProductName(){
+    public final String getProductName(){
         return product.getName();
     }
     
-    public double getProductPrice(){
+    public final double getProductPrice(){
         return product.getUnitPrice();
     }
     
-    public double getDiscountTotal(int qty){
+    public final double getDiscountTotal(int qty){
         return product.getDiscountedProductTotal(qty);
     }
     
-    public Product getProduct() {
+    public final Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public final void setProduct(Product product) {
         this.product = product;
     }
     
-    public double getSubTotal(){
+    public final double getSubTotal(){
         return product.getUnitPrice() * qty;
     }
     
-    public double getDiscountedSubTotal(int qty){
+    public final double getDiscountedSubTotal(int qty){
         return product.getDiscountedProductTotal(qty);
     } 
     
@@ -60,7 +62,10 @@ public class LineItem {
     
         public String getLineMsg(Product product, int qty){
         
-        String linemsg = ("Product ID: " + product.getProductID() + " Product Name: " + product.getName() + " Qty: " + qty + " Unit Price: " + product.getUnitPrice() + " total: " + (product.getUnitPrice() * qty) + " Total Discount: " + product.getDiscountedProductTotal(qty));
+        String linemsg = ("Product ID: " + product.getProductID() + " Product Name: "
+                + product.getName() + " Qty: " + qty + " Unit Price: " + product.getUnitPrice() 
+                + " total: " + (product.getUnitPrice() * qty) + " Total Discount: " 
+                + product.getDiscountedProductTotal(qty));
         return linemsg;
         }
         
