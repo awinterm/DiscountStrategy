@@ -22,7 +22,7 @@ public class Product {
     
  
     }
-    public Product(double unitPrice, String productID, String name, DiscountStrategy discount) {
+    public Product(String productID, String name, double unitPrice, DiscountStrategy discount) {
         this.unitPrice = unitPrice;
         this.productID = productID;
         this.name = name;
@@ -73,9 +73,5 @@ public class Product {
     
     
     
-    public static void main(String[] args) {
-        Product shirt = new Product(100.00, "BLue Shirt", "1aa11111",new PercentOffDiscount(.10));
-        double amountSaved = shirt.getAmountSaved(1);
-        System.out.println("amount saved " +  amountSaved);
-    }
+ 
 }
