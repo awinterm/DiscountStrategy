@@ -15,7 +15,7 @@ import java.util.Date;
 public class Receipt {
     
     private LineItem[] lines = new LineItem[0];
-    private LineItem[] temp = new LineItem[lines.length + 1];
+    
     
     private ReceiptDataAccessStrategy db = new FakeDatabase();
     private ICustomer customer;
@@ -33,6 +33,7 @@ public class Receipt {
     
     public void addProductToSale(String productID, int qty){
         
+        LineItem[] temp = new LineItem[lines.length + 1];
         Product p = new Product();
         p = db.findProduct(productID);
         LineItem line = new LineItem(p, qty);
@@ -76,7 +77,6 @@ public class Receipt {
         r.addProductToSale("A101", 5);
         r.addProductToSale("B205", 5);
         r.addProductToSale("C222", 5);
-        
         r.printReceipt();
         
     }
