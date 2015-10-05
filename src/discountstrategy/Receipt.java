@@ -16,19 +16,23 @@ public class Receipt {
     
     private LineItem[] lines = new LineItem[0];
     
+    //i think mario isf'd
+    
+    //mario + jim = fucked    
     
     private ReceiptDataAccessStrategy db = new FakeDatabase();
     private ICustomer customer;
     private final String THANK_YOU_MSG = "Thank you for shopping at Kohl's!";
-    private OutputStrategy out = new ConsoleOutput();
+    private OutputStrategy out;
     Date today = Calendar.getInstance().getTime();
     private int saleNumber = 1;
     
-    
+    public Receipt(OutputStrategy out) {
+        this.out = out;
+    }
     
     public void setCustomer(String custID){
         customer = db.findCustomer(custID);    
-        
     }
     
     public void addProductToSale(String productID, int qty){
@@ -60,6 +64,9 @@ public class Receipt {
         out.writeln("Sold to: " + customer.getName());
         out.writeln("Date of Sale: " + today );
         out.writeln("Reciept Number: " + saleNumber);
+        out.writeln("custID \t Prod Discription \t Qty \t Price \t Subtotal \t Discount");
+        out.writeln("-------------------------------------------------------------------------------");
+        
         for(int i = 0; i < lines.length; i++){
             out.writeln(lines[i].getLineMsg());
             netSubTotal += lines[i].getSubTotal();
@@ -72,7 +79,7 @@ public class Receipt {
     }
      
     public static void main(String[] args){
-        Receipt r = new Receipt();
+        Receipt r = new Receipt(new ConsoleOutput());
         r.setCustomer("100");
         r.addProductToSale("A101", 5);
         r.addProductToSale("B205", 5);
