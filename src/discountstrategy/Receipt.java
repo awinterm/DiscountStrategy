@@ -16,9 +16,7 @@ public class Receipt {
     
     private LineItem[] lines = new LineItem[0];
     
-    //i think mario isf'd
     
-    //mario + jim = fucked    
     
     private ReceiptDataAccessStrategy db = new FakeDatabase();
     private ICustomer customer;
