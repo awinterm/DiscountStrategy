@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package discountstrategy;
-
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,7 +15,7 @@ import java.util.Date;
 public class Receipt {
     
     private LineItem[] lines = new LineItem[0];
-    
+    NumberFormat nf = NumberFormat.getCurrencyInstance();
     
     
     private ReceiptDataAccessStrategy db = new FakeDatabase();
@@ -30,7 +30,12 @@ public class Receipt {
     }
     
     public void setCustomer(String custID){
-        customer = db.findCustomer(custID);    
+        if(db.findCustomer(custID) == null) {
+            System.out.println("Sorry, This custId is not in found in the database.");
+        }
+        else {
+            customer = db.findCustomer(custID);
+        }    
     }
     
     public void addProductToSale(String productID, int qty){
@@ -56,7 +61,7 @@ public class Receipt {
         // some varibles to store runnning totals.
         double netSubTotal = 0;
         double totalSaved = 0;
-        double totalDue = 0;
+        String totalDue;
         // header
         out.writeln(THANK_YOU_MSG);
         out.writeln("Sold to: " + customer.getName());
@@ -70,8 +75,9 @@ public class Receipt {
             netSubTotal += lines[i].getSubTotal();
             totalSaved += lines[i].getDiscountedSubTotal(lines[i].getQty());
         }
-        out.writeln("SubTotal: " + netSubTotal);
-        out.writeln("Total Saved: " + totalSaved);
+        out.writeln("SubTotal: " + nf.format(netSubTotal));
+        out.writeln("Total Saved: " + nf.format(totalSaved));
+        totalDue =  nf.format(netSubTotal - totalSaved);
         out.writeln("Total Due: " + totalDue);
         saleNumber++;
     }

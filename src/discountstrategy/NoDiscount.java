@@ -12,26 +12,27 @@ package discountstrategy;
 class NoDiscount implements DiscountStrategy {
 
     public NoDiscount() {
+        
     }
 
     @Override
     public double getAmountSaved(double unitPrice, int qty) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
     }
 
     @Override
     public double getDiscountRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
     }
 
     @Override
     public double getDiscountedProductTotal(double unitPrice, int qty) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return unitPrice * qty;
     }
 
     @Override
     public void setDiscountRate(double discountRate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
     
 }

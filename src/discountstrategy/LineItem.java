@@ -5,11 +5,14 @@
  */
 package discountstrategy;
 
+import java.text.NumberFormat;
+
 /**
  *
  * @author andre_000
  */
 public class LineItem {
+    NumberFormat nf = NumberFormat.getCurrencyInstance();
     
     private Product product;
     private int qty;
@@ -60,16 +63,17 @@ public class LineItem {
     }
     
     public final double getDiscountedSubTotal(int qty){
-        return product.getDiscountedProductTotal(qty);
+        return  (product.getUnitPrice()* qty) - product.getDiscountedProductTotal(qty);
+        // this is wrong!
     } 
     
     // this is bad news bears. Just for testing. However... using a msg variable here isn't a horrible idea. 
     
         public String getLineMsg(){       
-        String linemsg = (product.getProductID() + " /t "
-                + product.getName() + " /t " + qty + " /t " + product.getUnitPrice() 
-                + " /t " + (product.getUnitPrice() * qty) + " /t " 
-                + ((product.getUnitPrice() * qty) - (product.getDiscountedProductTotal(qty))));
+        String linemsg = (product.getProductID() + " \t "
+                + product.getName() + " \t " + qty + " \t " + nf.format(product.getUnitPrice()) 
+                + " \t " + nf.format((product.getUnitPrice() * qty)) + " \t " 
+                + nf.format(((product.getUnitPrice() * qty) - (product.getDiscountedProductTotal(qty)))));
         return linemsg;
         }
         

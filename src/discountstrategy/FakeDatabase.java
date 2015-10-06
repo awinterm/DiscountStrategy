@@ -21,14 +21,14 @@ public class FakeDatabase implements ReceiptDataAccessStrategy {
     private Product[] products = {
         new Product("A101", "MLB Brewer's Hat ", 19.95, new PercentOffDiscount(0.15)),
         new Product("B205", "Men's Dress Shirt", 35.50, new QtyDiscount(.10,5)),
-        new Product("C222", "Women's Socks    ", 9.50, new NoDiscount())
+        new Product("C222", "Women's Socks    ", 09.50, new NoDiscount())
     };
     
     /**
      * Tries to find a Customer by customer id.
      * @param custId - must not be null or empty
      * @return found Customer or null if not found or bad argument
-     */
+     */ 
     @Override
     public final ICustomer findCustomer(final String custId) {
         // validation is needed for method parameter
@@ -47,7 +47,7 @@ public class FakeDatabase implements ReceiptDataAccessStrategy {
                 break;
             }
         }
-        
+         
         return customer;
     }
     
