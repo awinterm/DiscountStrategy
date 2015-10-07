@@ -17,11 +17,11 @@ public class Start {
     public static void main(String[] args) {
   
         CashRegistar cashReg = new CashRegistar();
-        cashReg.startNewSale(new ConsoleOutput());
+        cashReg.startNewSale(new ConsoleOutput(), new FakeDatabase());
         cashReg.setCustomer("100");
         cashReg.addItemsToSale("A101", 2);
         cashReg.addItemsToSale("B205", 6);
-        cashReg.addItemsToSale("C222", 2);
+        cashReg.addItemsToSale("C222", 3);
         cashReg.printReceipt();
         
     }

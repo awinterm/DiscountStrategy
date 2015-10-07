@@ -16,22 +16,22 @@ class NoDiscount implements DiscountStrategy {
     }
 
     @Override
-    public double getAmountSaved(double unitPrice, int qty) {
+    public final double getAmountSaved(double unitPrice, int qty) {
         return 0;
     }
 
     @Override
-    public double getDiscountRate() {
+    public final double getDiscountRate() {
         return 0;
     }
 
     @Override
-    public double getDiscountedProductTotal(double unitPrice, int qty) {
+    public final double getDiscountedProductTotal(double unitPrice, int qty) {
         return unitPrice * qty;
     }
 
     @Override
-    public void setDiscountRate(double discountRate) {
+    public final void setDiscountRate(double discountRate) {
        
     }
     

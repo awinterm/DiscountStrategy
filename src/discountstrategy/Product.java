@@ -29,29 +29,33 @@ public class Product {
         this.discount = discount;
     }
 
-    public double getAmountSaved(int  qty){
+    public final double getAmountSaved(int  qty){
         return discount.getAmountSaved(unitPrice, qty);
     }
     
-    public double getDiscountedProductTotal(int qty){
+    public final double getDiscountedProductTotal(int qty){
         return discount.getDiscountedProductTotal(unitPrice, qty);
     }
     
     
     
-    public double getUnitPrice() {
+    public final double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public final void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public String getProductID() {
+    public final String getProductID() {
         return productID;
     }
 
-    public void setProductID(String productID) {
+    public final void setProductID(String productID) {
+        if(productID == null) {
+            System.out.println("Sorry, Product.setProductID method has "
+                    + "illegal argument");
+        }    
         this.productID = productID;
     }
 
@@ -59,15 +63,24 @@ public class Product {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
+        if(name == null) {
+            System.out.println("Sorry, Product.setName method has "
+                    + "illegal argument");
+        }    
+        
         this.name = name;
     }
 
-    public DiscountStrategy getDiscount() {
+    public final DiscountStrategy getDiscount() {
         return discount;
     }
 
-    public void setDiscount(DiscountStrategy discount) {
+    public final void setDiscount(DiscountStrategy discount) {
+        if(discount == null) {
+            System.out.println("Sorry, Product.setDiscount method has "
+                    + "illegal argument");
+        }    
         this.discount = discount;
     }
     

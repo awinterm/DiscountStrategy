@@ -12,22 +12,41 @@ package discountstrategy;
 public class CashRegistar {
     private Receipt receipt;
     
-    public void startNewSale(OutputStrategy out) {
-        receipt = new Receipt(out);
+    public final void startNewSale(OutputStrategy out, ReceiptDataAccessStrategy db) {
+        if (out == null){
+            throw new IllegalArgumentException("OutputStrategy is null");
+        }
+        if (db == null){
+            throw new IllegalArgumentException("ReceiptDataAccessStrategy is null");
+        }
+        receipt = new Receipt(out, db);
     }   
     
-    public void setCustomer(String custID){
+    public final void setCustomer(String custID){
+           if (custID == null){
+            throw new IllegalArgumentException("custID is null");
+        }
         receipt.setCustomer(custID);
     }
     
-    public void addItemsToSale(String custID, int qty){
-       receipt.addProductToSale(custID, qty);
+    public final void addItemsToSale(String custID, int qty){
+        if (custID == null){
+            throw new IllegalArgumentException("custID is null");
+        }
+        if (qty == 0){
+            throw new IllegalArgumentException("qty is null");
+        }
+        
+        receipt.addProductToSale(custID, qty);
     }
     
-    public void printReceipt(){
+    public final void printReceipt(){
         receipt.printReceipt();
     }
-    // extra cool things you could add Don't DO any untill this all works first.
+    
+
+
+// extra cool things you could add Don't DO any untill this all works first.
     
     public void voidLastItem(){
         // basicailly undo the last bit. 
@@ -35,7 +54,5 @@ public class CashRegistar {
     
     public void reviewOrder(){
         // Joptionpane a copy of the order before printing to the console.
-        // Really just calling... WAIT A FUCKING SECOND... 
-        // You need some output strat. possibly some input strat... however... like... you really only have ...Fuck.
     }
 }

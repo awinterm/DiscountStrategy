@@ -10,14 +10,14 @@ package discountstrategy;
  * @author andre_000
  */
 public class FakeDatabase implements ReceiptDataAccessStrategy {
-    private ICustomer[] customers = {
-        new ICustomer("100", "John Smith"),
-        new ICustomer("200", "Sally Jones"),
-        new ICustomer("300", "Bob Clementi")
+    private final Customer[] customers = {
+        new Customer("100", "John Smith"),
+        new Customer("200", "Sally Jones"),
+        new Customer("300", "Bob Clementi")
     };
     
 
-    // Fix these lines... or like...
+    
     private Product[] products = {
         new Product("A101", "MLB Brewer's Hat ", 19.95, new PercentOffDiscount(0.15)),
         new Product("B205", "Men's Dress Shirt", 35.50, new QtyDiscount(.10,5)),
@@ -30,7 +30,7 @@ public class FakeDatabase implements ReceiptDataAccessStrategy {
      * @return found Customer or null if not found or bad argument
      */ 
     @Override
-    public final ICustomer findCustomer(final String custId) {
+    public final Customer findCustomer(final String custId) {
         // validation is needed for method parameter
         if(custId == null || custId.length() == 0) {
             System.out.println("Sorry, FakeDatabase.findCustomer method has "
@@ -38,9 +38,9 @@ public class FakeDatabase implements ReceiptDataAccessStrategy {
             return null;  // end method prematurely after log to console
         }
         
-        ICustomer customer = null;
+        Customer customer = null;
         
-        for (ICustomer c : customers) {
+        for (Customer c : customers) {
 
             if (custId.equals(c.getCustID())) {
                 customer = c;

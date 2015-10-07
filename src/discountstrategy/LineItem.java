@@ -17,11 +17,11 @@ public class LineItem {
     private Product product;
     private int qty;
 
-    public void setQty(int qty) {
+    public final void setQty(int qty) { 
         this.qty = qty;
     }
 
-    public int getQty() {
+    public final int getQty() {
         return qty;
     }
     
@@ -29,7 +29,7 @@ public class LineItem {
     public LineItem() {
     }
 
-    public LineItem(Product product, int qty) {
+    public LineItem(Product product, int qty) {   
         this.product = product;
         this.qty = qty;
     }
@@ -53,8 +53,12 @@ public class LineItem {
     public final Product getProduct() {
         return product;
     }
-
+ 
     public final void setProduct(Product product) {
+        if(product == null) {
+            System.out.println("Sorry, LineItem.setProduct method has "
+                    + "illegal argument");
+        }
         this.product = product;
     }
     
@@ -64,10 +68,9 @@ public class LineItem {
     
     public final double getDiscountedSubTotal(int qty){
         return  (product.getUnitPrice()* qty) - product.getDiscountedProductTotal(qty);
-        // this is wrong!
+        
     } 
     
-    // this is bad news bears. Just for testing. However... using a msg variable here isn't a horrible idea. 
     
         public String getLineMsg(){       
         String linemsg = (product.getProductID() + " \t "

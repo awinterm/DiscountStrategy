@@ -18,18 +18,20 @@ public class Receipt {
     NumberFormat nf = NumberFormat.getCurrencyInstance();
     
     
-    private ReceiptDataAccessStrategy db = new FakeDatabase();
-    private ICustomer customer;
+    //private ReceiptDataAccessStrategy db = new FakeDatabase();
+    private ReceiptDataAccessStrategy db;
+    private Customer customer;
     private final String THANK_YOU_MSG = "Thank you for shopping at Kohl's!";
     private OutputStrategy out;
     Date today = Calendar.getInstance().getTime();
     private int saleNumber = 1;
     
-    public Receipt(OutputStrategy out) {
+    public Receipt(OutputStrategy out, ReceiptDataAccessStrategy db) {
         this.out = out;
+        this.db = db;
     }
     
-    public void setCustomer(String custID){
+    public final void setCustomer(String custID){
         if(db.findCustomer(custID) == null) {
             System.out.println("Sorry, This custId is not in found in the database.");
         }
@@ -38,8 +40,10 @@ public class Receipt {
         }    
     }
     
-    public void addProductToSale(String productID, int qty){
-        
+    public final void addProductToSale(String productID, int qty){
+        if(db.findProduct(productID) == null) {
+            System.out.println("Sorry, This ProductId is not in found in the database.");
+        }
         LineItem[] temp = new LineItem[lines.length + 1];
         Product p = new Product();
         p = db.findProduct(productID);
@@ -53,37 +57,12 @@ public class Receipt {
         temp = null;   
     }
     
-    
-    
-    
-    
     public final void printReceipt(){
-        // some varibles to store runnning totals.
-        double netSubTotal = 0;
-        double totalSaved = 0;
-        String totalDue;
-        // header
-        out.writeln(THANK_YOU_MSG);
-        out.writeln("Sold to: " + customer.getName());
-        out.writeln("Date of Sale: " + today );
-        out.writeln("Reciept Number: " + saleNumber);
-        out.writeln("custID \t Prod Discription \t Qty \t Price \t Subtotal \t Discount");
-        out.writeln("-------------------------------------------------------------------------------");
-        
-        for(int i = 0; i < lines.length; i++){
-            out.writeln(lines[i].getLineMsg());
-            netSubTotal += lines[i].getSubTotal();
-            totalSaved += lines[i].getDiscountedSubTotal(lines[i].getQty());
-        }
-        out.writeln("SubTotal: " + nf.format(netSubTotal));
-        out.writeln("Total Saved: " + nf.format(totalSaved));
-        totalDue =  nf.format(netSubTotal - totalSaved);
-        out.writeln("Total Due: " + totalDue);
-        saleNumber++;
+        out.printReceipt(THANK_YOU_MSG, customer.getName(), today, saleNumber, lines);
     }
      
     public static void main(String[] args){
-        Receipt r = new Receipt(new ConsoleOutput());
+        Receipt r = new Receipt(new ConsoleOutput(), new FakeDatabase());
         r.setCustomer("100");
         r.addProductToSale("A101", 5);
         r.addProductToSale("B205", 5);
