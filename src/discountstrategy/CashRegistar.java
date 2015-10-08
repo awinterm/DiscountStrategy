@@ -11,7 +11,13 @@ package discountstrategy;
  */
 public class CashRegistar {
     private Receipt receipt;
-    
+    /**
+     * This method starts a new sale. It creates a new receipt and passes a OutputStrategy object 
+     * and a ReceiptDataAccessStrategy object to it. This Java Doc comment shows what I know about Java Doc.  
+     * 
+     * @param out an OutputStrategy object
+     * @param db  a ReceiptDataAccessStrategy object
+     */
     public final void startNewSale(OutputStrategy out, ReceiptDataAccessStrategy db) {
         if (out == null){
             throw new IllegalArgumentException("OutputStrategy is null");

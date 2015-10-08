@@ -9,7 +9,7 @@ public class ConsoleOutput implements OutputStrategy {
 
         @Override
 	public final void printReceipt(String msg, String name, Date today, int saleNumber, LineItem[] lines) {
-             if (msg == null){
+             if (msg == null || msg.isEmpty()){
             throw new IllegalArgumentException("msg is null");
             }
              if (name == null){
