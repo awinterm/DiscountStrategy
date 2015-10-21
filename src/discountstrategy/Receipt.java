@@ -15,7 +15,7 @@ import java.util.Date;
 public class Receipt {
     
     private LineItem[] lines = new LineItem[0];
-    NumberFormat nf = NumberFormat.getCurrencyInstance();
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
     
     
     //private ReceiptDataAccessStrategy db = new FakeDatabase();
