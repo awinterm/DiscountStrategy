@@ -10,6 +10,8 @@ public class ConsoleOutput implements OutputStrategy {
         @Override
 	public final void printReceipt(String msg, String name, Date today, int saleNumber, LineItem[] lines) {
              if (msg == null || msg.isEmpty()){
+            // this is the correct way to handle this but, you have to use custom excemptions from now on out
+                 // Also you need to handle try catches so the user is not disturbed.
             throw new IllegalArgumentException("msg is null");
             }
              if (name == null){
